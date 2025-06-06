@@ -1,0 +1,49 @@
+{
+  "name": "book-rental-api",
+  "version": "1.0.0",
+  "description": "Backend API for managing book rentals",
+  "main": "server.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "jest --runInBand",
+    "test:report": "jest --reporters=default --reporters=jest-html-reporters"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3",
+    "nodemon": "^3.1.0",
+    "jest-html-reporters": "^3.1.5"
+  },
+  
+  "jest": {
+    "testEnvironment": "node",
+    "reporters": [
+      "default",
+      [
+        "jest-html-reporters",
+        {
+          "publicPath": "./html-report",
+          "filename": "report.html",
+          "expand": true
+        }
+      ]
+    ]
+  },
+
+  "keywords": [
+    "books",
+    "rental",
+    "api",
+    "backend"
+  ],
+  "author": "Yashwardhan Singh",
+  "license": "ISC"
+}
