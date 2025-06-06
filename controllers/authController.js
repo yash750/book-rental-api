@@ -23,3 +23,14 @@ exports.login = async (req, res) => {
   const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET);
   res.json({ token });
 };
+
+exports.getProfile = async (req, res) => {
+    try {
+      const user = await require('../models/user').findById(req.user.id).select('-password');
+      if (!user) return res.status(404).json({ message: 'User not found' });
+      res.json(user);
+    } catch (error) {
+      res.status(500).json({ message: 'Server error' });
+    }
+  };
+  
