@@ -1,129 +1,45 @@
-name: Generate & Run Tests withifact` step in your workflow to use the latest supported of April 16, 2024. To resolve the issue, you need to version, which is `v4`. Here's the updated workflow Codex
-
-on:
-  push:
-    branches: [ main ]
-  pull_request update the action to its latest version (`v4`).
-
-### file:
-
-```yaml
-name: Generate & Run Tests with Cod:
-    branches: [ main ]
-
-jobs:
-  codex-test-gen:
- Solution
-1. Update the `uses` directive for the `ex
+name: Generate & Run Tests with Codex
 
 on:
   push:
     branches: [ main ]
   pull_request:
-actions/upload-artifact` step in your workflow file to    runs-on: ubuntu-latest
-
-    env:
-      OPENAI    branches: [ main ]
-
-jobs:
-  codex-test-gen:
- use `v4`.
-
-Here’s the updated workflow file with the_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
-    steps:
-         runs-on: ubuntu-latest
-
-    env:
-      OPENAI_API fix:
-
-```yaml
-name: Generate & Run Tests with Codex - name: Checkout code
-        uses: actions/_KEY: ${{ secrets.OPENAI_API_KEY }}
-
-    steps:
-     checkout@v3
-
-      - name: Set up Node.js
-        uses
-
-on:
-  push:
     branches: [ main ]
-  pull_request:
-    - name: Checkout code
-        uses: actions/: actions/setup-node@v3
-        with:
-          node branches: [ main ]
-
 jobs:
   codex-test-gen:
-   checkout@v3
-
-      - name: Set up Node.js
-        uses:-version: '22'
-
-      - name: Install dependencies
-        runs-on: ubuntu-latest
-
+    runs-on: ubuntu-latest
+    
     env:
-      OPENAI_API_KEY actions/setup-node@v3
-        with:
-          node-version run: npm install
-
-      - name: Install Codex CLI: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
     steps:
-      - name: '22'
-
-      - name: Install dependencies
-       
-        run: npm install -g @openai/codex
-
-      run: npm install
-
-      - name: Install Codex: Checkout code
-        uses: actions/checkout@v - name: Generate tests with Codex (non-destructive)
- CLI
-        run: npm install -g @openai/codex
-
-     3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node - name:        run: |
-          codex \
-            --dir ./ \
-@v3
+        uses: actions/setup-node@v3
         with:
-          node-version:            --only tests \
-            --output-dir ./ '22'
+          node-version: '22'
 
       - name: Install dependencies
-        run:tests/generated \
-            --system-prompt "$(cat npm install
+        run: npm install
 
       - name: Install Codex CLI
-        .codex-prompt.txt)" \
+        run: npm install -g @openai/codex
+
+      - name: Generate tests with Codex (non-destructive)
+        run: |
+          codex \
+            --dir ./ \
+            --only tests \
+            --output-dir ./tests/generated \
+            --system-prompt "$(cat .codex-prompt.txt)" \
             --mode safe
 
- run: npm install -g @openai/codex
+      - name: Run all Jest tests
+        run: npm test --coverage --json --outputFile=test-report.json
 
-      - name      - name: Run all Jest tests
-        run: npm test --: Generate tests Generate tests with Codex (non-destructive with Codex (non-destructive)
-        --coverage --json --outputFile=test-report.json
-           run: |
-          codex \
-            --dir ./ run: |
-          codex \
-            --dir ./      - name: Upload HTML Test Report
-        uses \
-            --only tests \
-            --output-dir ./ \
-            --only tests \
-            --output-dirtests/generated \
-            --system-prompt "$(cat: actions/upload-artifact@v4  # Updated to the latest version ./tests/generated \
-            --system-prompt "$(cat
+      - name: Upload HTML Test Report
+        uses: actions/upload-artifact@v4
         with:
           name: html-report
- .codex-prompt.txt)" \
-            --mode safe
