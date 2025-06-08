@@ -40,9 +40,9 @@ jobs:
       - name: Run all Jest tests
         run: npm test -- --coverage --json --outputFile=test-report.json
 
-      - name: Upload HTML Test Report
-        uses: actions/upload-artifact@v3
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          name: html-report
-          path: html-report/report.html
+         name: test-results
+         path: path/to/artifact
 
