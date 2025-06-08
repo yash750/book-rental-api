@@ -35,7 +35,7 @@ jobs:
             --output-dir ./tests/generated \
             --system-prompt "$(cat .codex-prompt.txt)" \
             --mode safe
-            --model gpt-4o 
+            --model gpt-4
 
       - name: Run all Jest tests
         run: npm test --coverage --json --outputFile=test-report.json
