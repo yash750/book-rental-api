@@ -111,9 +111,7 @@ jobs:
       - name      - name: Run all Jest tests
         run: npm test --: Generate tests Generate tests with Codex (non-destructive with Codex (non-destructive)
         --coverage --json --outputFile=test-report.json
-
-)
-        run: |
+           run: |
           codex \
             --dir ./ run: |
           codex \
@@ -129,8 +127,3 @@ jobs:
           name: html-report
  .codex-prompt.txt)" \
             --mode safe
-
-      .codex-prompt.txt)" \
-            --mode safe
-
-          path: html-report/report.html
