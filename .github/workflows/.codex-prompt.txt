@@ -7,6 +7,7 @@ Your task is to analyze a Node.js API backend project and ensure **complete test
 ## 🔹 STAGE 1: START
 
 - Load and scan the entire codebase (controllers, models, routes)
+- Understand the overall product and its flow
 - Identify all exposed API endpoints, authentication strategies, role-based logic, and error-handling flows
 - Logically understand what the backend does from both a **developer’s** and a **user’s** perspective
 
@@ -16,6 +17,8 @@ You now have access to the project source code and are ready to build a test str
 
 ## 🔹 STAGE 2: PLAN
 
+For generating test cases **think** about different combinations of all possible scenarios for its workflow
+Think for technical scenarios as well as real world based possibilities from user side
 Develop a testing strategy using **three-layered planning**:
 
 ### ✅ Layer 1: Basic Functional Flow
@@ -29,23 +32,25 @@ Develop a testing strategy using **three-layered planning**:
 ### ✅ Layer 3: Real-World & Human Behavior Scenarios
 - Consider real user behavior: retries, abandonments, illegal transitions, misuse
 - Example: "What if a user rents a book and tries renting it again before returning?"
+  "What if an user book a cab outside of its operatable area?"
+- Think about product based and its user based cases
 - Simulate real-world flaws like concurrent actions, overuse, abuse, spoofing headers, or retrying failed calls
 - Think about business rules and violations
 
+After planning, keep in mind all cases for generating test cases
 You are now ready to act.
 
 ---
 
 ## 🔹 STAGE 3: ACTION (Test Case Generation)
 
-- Generate Jest + Supertest test cases in JavaScript
+- Generate test cases for all that scenarios as per your plan using Jest + Supertest  
 - For each endpoint, generate:
   - ✅ Valid success case(s)
   - ✅ Broken input or logic paths
   - ✅ Real-world user misuse or boundary scenario
 - Save new test files under `./tests/` or subfolders like `./tests/generated/`
 - Avoid duplication; don't overwrite good existing tests
-- Organize logically: `/auth`, `/books`, `/rentals`, etc.
 - Mark test sections clearly as:
   - `// --- Layer 1: Basic Functional Test`
   - `// --- Layer 2: Edge Case`
@@ -53,7 +58,7 @@ You are now ready to act.
 
 ---
 
-## 🔁 LOOP: OBSERVATION → ACTION
+## 🔁 LOOP: OBSERVATION <-> ACTION
 
 - After generating a batch of tests:
   - Re-analyze the codebase and your current test coverage
@@ -63,9 +68,9 @@ You are now ready to act.
     - Any logic holes or bypasses?
     - Any real-world workflows users might try?
 
-- If uncovered paths are found, go back to **Action** and generate more test cases.
+- If uncovered paths are found, go back to **PLAN** then **Action** and generate more test cases.
 
-Repeat this **Action ↔ Observation** loop until:
+Repeat this **Plan -> Action -> Observation** loop until:
 - No logical or real-world scenario is left
 - All functional paths are covered
 - Every business constraint is enforced via tests
