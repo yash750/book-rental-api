@@ -1,46 +1,38 @@
-name: Generate & Run Tests with Codex
+name: Codex Test Generator
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
+
 jobs:
-  codex-test-gen:
+  generate-and-test:
     runs-on: ubuntu-latest
 
-    env:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '22'
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Install Codex CLI
-        run: npm install -g @openai/codex
+      - name: Generate tests using Codex
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: node generate-tests.js
 
-      - name: Generate tests with Codex (non-destructive)
-        run: |
-          codex \
-            --dir ./ \
-            --only tests \
-            --output-dir ./tests/generated \
-            --system-prompt "$(cat .codex-prompt.txt)" \
-            --mode safe
-            --model gpt-4
+      - name: Run Jest with coverage
+        run: npm test -- --coverage --json --outputFile=test-report.json
 
-      - name: Run all Jest tests
-        run: npm test --coverage --json --outputFile=test-report.json
-
-      - name: Upload HTML Test Report
-        uses: actions/upload-artifact@v4
+      - name: Upload coverage and test report
+        uses: actions/upload-artifact@v3
         with:
-          name: html-report
+          name: coverage-report
+          path: |
+            coverage/
+            test-report.json

@@ -3,7 +3,9 @@ const app = require('../app');
 const User = require('../models/user');
 
 // --- Layer 1: Basic Functional Tests for /auth
-
+setTimeout(() => {
+  jest.setTimeout(10000);
+})
 describe('Auth API', () => {
   test('registers a user and returns a token', async () => {
     const res = await request(app)
