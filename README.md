@@ -3,12 +3,14 @@
 book-rental-api
 ├─ .DS_Store
 ├─ .codex-prompt.txt
+├─ README.md
 ├─ app.js
 ├─ controllers
 │  ├─ authController.js
 │  ├─ bookController.js
 │  └─ rentalController.js
 ├─ generate-tests.js
+├─ jest.config.js
 ├─ middleware
 │  └─ auth.js
 ├─ models
@@ -21,11 +23,6 @@ book-rental-api
 │  ├─ auth.js
 │  ├─ books.js
 │  └─ rentals.js
-├─ server.js
-└─ tests
-   ├─ auth.test.js
-   ├─ books.test.js
-   ├─ rentals.test.js
-   └─ setup.js
+└─ server.js
 
 ```
