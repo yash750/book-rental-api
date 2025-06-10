@@ -33,29 +33,28 @@ Develop a testing strategy using **three-layered planning**:
 ### ✅ Layer 3: Real-World & Human Behavior Scenarios
 - Consider real user behavior: retries, abandonments, illegal transitions, misuse
 - Example: "What if a user rents a book and tries renting it again before returning?"
-  "What if an user book a cab outside of its operatable area?"
-- Think about product based and its user based cases
+  "What if an user books a cab outside of its operable area?"
+- Think about product-based and user-based cases
 - Simulate real-world flaws like concurrent actions, overuse, abuse, spoofing headers, or retrying failed calls
 - Think about business rules and violations
 
-After planning, keep in mind all cases for generating test cases
+After planning, keep in mind all cases for generating test cases.
 You are now ready to act.
 
 ---
 
 ## 🔹 STAGE 3: ACTION (Test Case Generation)
 
-- Generate test cases for all that scenarios as per your plan using Jest + Supertest  
+- Generate test cases for all those scenarios as per your plan using Jest + Supertest  
 - For each endpoint, generate:
   - ✅ Valid success case(s)
   - ✅ Broken input or logic paths
-  - ✅ Real-world user misuse or boundary scenario
-- Save new test files under ./tests/ or subfolders like ./tests/generated/
-- Avoid duplication; don't overwrite good existing tests
-- Mark test sections clearly as:
-  - // --- Layer 1: Basic Functional Test
-  - // --- Layer 2: Edge Case
-  - // --- Layer 3: Real World
+  - ✅ Real-world user misuse or boundary scenarios
+- Save new test files under `./tests/` or subfolders like `./tests/generated/`
+- Do **not include any descriptions, comments, or planning notes**—just the code.
+- The output must **only** contain valid Jest test code that can be directly executed.
+- Do not include any Markdown formatting, comments like "Layer 1", "Layer 2", or "Layer 3".
+- The output must **start with** `const request = require('supertest');` or similar, followed by the test cases.
 
 ---
 
@@ -79,23 +78,9 @@ Repeat this **Plan -> Action -> Observation** loop until:
 ---
 
 ## 🔹 STAGE 5: OUTPUT
-- Output : .test.js files which includes test cases only, unwanted description not needed
-- Save all test cases in the appropriate ./tests/ directory
-- Run Jest with full coverage:
-  
-bash
-  npm test -- --coverage --json --outputFile=test-report.json
+- **Only valid JavaScript test code** should be returned.
+- Do not include any explanation, planning, or descriptive text.
+- The output must **start with** `const request = require('supertest');`
+- The file must be a standalone `.test.js` file that works with Jest and can be run directly.
 
-🔹 OUTPUT FORMAT RULES:
-- Return **only valid JavaScript test code**, no Markdown formatting, no comments like "Layer 1"
-- Do not include any explanation or planning text
-- The output must start with `const request = require('supertest');` or similar
-- The output must be a standalone `.test.js` file that works with `npm test`
-
-🔹 TEST STRATEGY:
-Follow this internally (but don't print it):
-- Cover success cases
-- Handle broken/missing input cases
-- Include real-world misuse (e.g., duplicate actions, invalid tokens, etc.)
-
-Return only code.
+## The project directory structure is as follows:
