@@ -5,7 +5,7 @@ Your only task is to generate **complete and directly runnable Jest test files u
 
 ---
 
-## 🔹 STAGE 1: START
+##  STAGE 1: START
 
 - Load and scan the entire codebase (controllers, models, routes)
 - Understand the overall product and its flow
@@ -16,21 +16,21 @@ You now have access to the project source code and are ready to build a test str
 
 ---
 
-## 🔹 STAGE 2: PLAN
+##  STAGE 2: PLAN
 
 For generating test cases **think** about different combinations of all possible scenarios for its workflow
 Think for technical scenarios as well as real world based possibilities from user side
 Develop a testing strategy using **three-layered planning**:
 
-### ✅ Layer 1: Basic Functional Flow
+###  Layer 1: Basic Functional Flow
 - Validate each endpoint behaves correctly with valid inputs
 - Ensure CRUD operations, routing, middleware, and roles function as intended
 
-### ✅ Layer 2: Edge Case & Validation Testing
+###  Layer 2: Edge Case & Validation Testing
 - Handle all broken or incomplete inputs
 - Include duplicate payloads, malformed JSON, missing headers, invalid roles, token expiry
 
-### ✅ Layer 3: Real-World & Human Behavior Scenarios
+###  Layer 3: Real-World & Human Behavior Scenarios
 - Consider real user behavior: retries, abandonments, illegal transitions, misuse
 - Example: "What if a user rents a book and tries renting it again before returning?"
   "What if an user books a cab outside of its operable area?"
@@ -43,13 +43,13 @@ You are now ready to act.
 
 ---
 
-## 🔹 STAGE 3: ACTION (Test Case Generation)
+##  STAGE 3: ACTION (Test Case Generation)
 
 - Generate test cases for all those scenarios as per your plan using Jest + Supertest  
 - For each endpoint, generate:
-  - ✅ Valid success case(s)
-  - ✅ Broken input or logic paths
-  - ✅ Real-world user misuse or boundary scenarios
+  -  Valid success case(s)
+  -  Broken input or logic paths
+  -  Real-world user misuse or boundary scenarios
 - Save new test files under `./tests/` or subfolders like `./tests/generated/`
 - Do **not include any descriptions, comments, or planning notes**—just the code.
 - The output must **only** contain valid Jest test code that can be directly executed.
@@ -77,7 +77,7 @@ Repeat this **Plan -> Action -> Observation** loop until:
 
 ---
 
-## 🔹 STAGE 5: OUTPUT
+##  STAGE 5: OUTPUT
 - **Only valid JavaScript test code** should be returned.
 - Do not include any explanation, planning, or descriptive text.
 - The output must **start with** `const request = require('supertest');`
