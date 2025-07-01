@@ -5,7 +5,6 @@ const borrowRecord = require('../models/BorrowRecord.model');
 const User = require('../models/User.model');
 
 exports.createReservation = async (req, res) => {
-    // NOTE: For production, these operations should be wrapped in a database transaction.
     try {
         const { bookId } = req.body;
         const userId = req.user.id; // Use authenticated user's ID, not from body
@@ -35,9 +34,8 @@ exports.getReservations = async (req, res) => {
     }
 };
 
-//reject reservation
+
 exports.rejectReservation = async (req, res) => {
-    // NOTE: For production, these operations should be wrapped in a database transaction.
     try {
         const reservation = await Reservation.findById(req.params.id);
         if (!reservation) return res.status(404).json({ message: 'Reservation not found' });
@@ -55,7 +53,6 @@ exports.rejectReservation = async (req, res) => {
 }
 
 exports.acceptReservation = async (req, res) => {
-    // NOTE: For production, these operations should be wrapped in a database transaction.
     try {
         const reservation = await Reservation.findById(req.params.id);
         if (!reservation) return res.status(404).json({ message: 'Reservation not found' });
