@@ -4,8 +4,9 @@ const User = require('../models/User.model');
 const PayFine = require('../models/PayFine.model');
 
 exports.payFine = async (req, res) => {
+    console.log("Your payment is processing");
     try {
-        const fineRecord = await payFine.findById(req.params.id);
+        const fineRecord = await PayFine.findById(req.params.id);
         if (!fineRecord) return res.status(404).json({ message: 'Payment not found' });
         fineRecord.fineStatus = 'paid';
         fineRecord.paidAt = new Date();
@@ -18,3 +19,10 @@ exports.payFine = async (req, res) => {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
+
+// exports.payFine = async (req, res) => {
+//     console.log("Your payment is processing");
+//     const fineRecord = await PayFine.findById(req.params.id);
+//     console.log(fineRecord);
+//     return res.status(200).json({ message: 'Payment received' });
+// };

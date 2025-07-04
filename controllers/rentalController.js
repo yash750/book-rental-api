@@ -25,10 +25,16 @@ const isLate = async (record) => {
 
 //Calculate fine if user isLate in returning the book
 const calculateFine = async (record) => {
-  const delayInDays = await Math.ceil((record.dueAt - record.returnedAt) / (1000 * 60 * 60 * 24));
-  const fine = delayInDays * 10;
+  const now = new Date();
+  const delayInMs = now - record.dueAt;
+
+  if (delayInMs <= 0) return 0; // not late
+
+  const delayInDays = Math.ceil(delayInMs / (1000 * 60 * 60 * 24));
+  const fine = delayInDays * 10; // ₹10 per day
   return fine;
 };
+
 
 exports.returnBook = async (req, res) => {
   const record = await borrowRecord.findOne({ userId: req.user.id, bookId: req.body.bookId, returnedAt: null });
@@ -39,17 +45,17 @@ exports.returnBook = async (req, res) => {
   if(isLate(record) && !fineRecord){
     record.fineAmount = await calculateFine(record);
     user.outstandingFine += record.fineAmount;
-    fineRecord = new payFine({ BorrowRecordId: record._id, outstandingFine: record.fineAmount });
+    const newFineRecord = new payFine({ BorrowRecordId: record._id, outstandingFine: record.fineAmount });
     record.isLate = true;
-    await fineRecord.save();
+    await newFineRecord.save();
     await record.save();
     await user.save();
   }
   if(isLate(record) && fineRecord.fineStatus === 'pending'){
     console.log('Pay the fine and then return the book');
     console.log("Click here to make payment :");
-    console.log(`https://localhost:5000/payFine/make-payment/${fineRecord._id}`);
-    return;
+    console.log(`https://localhost:5000/fines/${fineRecord._id}`);
+    return res.status(400).json({ message: 'Pay the fine and then return the book' });
   }
 
   record.returnedAt = new Date();
