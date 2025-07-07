@@ -2,6 +2,8 @@ const borrowRecord = require('../models/BorrowRecord.model');
 const Book = require('../models/Book.model');
 const User = require('../models/User.model');
 const payFine = require('../models/PayFine.model');
+const {isLate, calculateFine} = require('../utils/lateSubmission');
+
 
 exports.rentBook = async (req, res) => {
   const book = await Book.findById(req.body.bookId);
@@ -16,23 +18,6 @@ exports.rentBook = async (req, res) => {
   await user.save();
   await record.save();
   res.status(201).json(record);
-};
-
-const isLate = async (record) => {
-  const isLate = await record.dueAt < new Date();
-  return isLate;
-};
-
-//Calculate fine if user isLate in returning the book
-const calculateFine = async (record) => {
-  const now = new Date();
-  const delayInMs = now - record.dueAt;
-
-  if (delayInMs <= 0) return 0; // not late
-
-  const delayInDays = Math.ceil(delayInMs / (1000 * 60 * 60 * 24));
-  const fine = delayInDays * 10; // ₹10 per day
-  return fine;
 };
 
 
